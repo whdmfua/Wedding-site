@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Guide - 조으렴 & 짙라다 사동</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/classic_luxe_theme.css">
+    <style>
+        body { font-family: var(--font-sans) !important; background: var(--background) !important; color: var(--foreground) !important; }
+        h1, h2, h3, h4 { font-family: var(--font-serif) !important; }
+        .gold-accent { color: var(--primary); text-shadow: 0 0 20px rgba(180, 149, 112, 0.3); }
+        .nav-link.active { color: var(--primary) !important; }
+        .timeline-line { background: linear-gradient(180deg, transparent 0%, var(--primary) 20%, var(--primary) 80%, transparent 100%); width: 1px; position: absolute; left: 50%; transform: translateX(-50%); top: 0; bottom: 0; }
+        .timeline-icon { width: 90px; height: 90px; background: var(--background); border: 2px solid var(--primary); display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: var(--shadow-xl); position: relative; }
+        .timeline-icon::before { content: ''; position: absolute; inset: -6px; border: 1px solid var(--primary); opacity: 0.3; }
+        .timeline-icon::after { content: ''; position: absolute; inset: -12px; border: 1px solid var(--primary); opacity: 0.1; }
+        .category-tag { color: #f8e68b; font-size: 1rem; }
+        .luxe-card { background: var(--card); border: 1px solid var(--primary); position: relative; overflow: hidden; }
+        .luxe-card::before { content: ''; position: absolute; top: -50%; right: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent 30%, rgba(180, 149, 112, 0.05) 50%, transparent 70%); transform: rotate(45deg); animation: shimmer 3s infinite; }
+        @keyframes shimmer { 0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); } 100% { transform: translateX(100%) translateY(100%) rotate(45deg); } }
+        @keyframes fadeInLuxe { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .timeline-item { opacity: 0; animation: fadeInLuxe 1.2s ease-out forwards; }
+        .timeline-item:nth-child(1) { animation-delay: 0.3s; } .timeline-item:nth-child(2) { animation-delay: 0.6s; } .timeline-item:nth-child(3) { animation-delay: 0.9s; }
+        .divider-luxe { width: 100px; height: 1px; background: var(--primary); margin: 2rem auto; position: relative; }
+        .divider-luxe::before, .divider-luxe::after { content: ''; position: absolute; width: 8px; height: 8px; background: var(--primary); transform: rotate(45deg); top: -3.5px; }
+        .divider-luxe::before { left: -4px; } .divider-luxe::after { right: -4px; }
+        .flight-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        .flight-table td { padding: 0.75rem; border-bottom: 1px solid var(--border); }
+        .flight-table td:first-child { font-weight: 500; }
+        .language-switcher { display: flex; align-items: center; gap: 0.5rem; }
+        .lang-btn { background: none; border: none; cursor: pointer; font-size: 1.5rem; transition: all 0.3s; opacity: 0.5; filter: grayscale(100%); }
+        .lang-btn:hover { opacity: 0.8; filter: grayscale(50%); }
+        .lang-btn.active { opacity: 1; filter: grayscale(0%); transform: scale(1.1); }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-opacity-95" style="background: var(--background);">
+        <div class="max-w-7xl mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <a href="index.html" class="text-2xl gold-accent font-serif">J & J</a>
+                    <div class="language-switcher md:hidden">
+                        <button class="lang-btn active" data-lang="ko" title="한국어">🇰🇷</button>
+                        <button class="lang-btn" data-lang="th" title="ไทย">🇹🇭</button>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="our-story.html" class="nav-link hover:text-opacity-80 transition" style="color: var(--foreground);">찾아오시는 길</a>
+                    <a href="gallery.html" class="nav-link hover:text-opacity-80 transition" style="color: var(--foreground);">사진첩</a>
+                    <a href="guestbook.html" class="nav-link hover:text-opacity-80 transition" style="color: var(--foreground);">방명록</a>
+                    <div class="language-switcher">
+                        <button class="lang-btn active" data-lang="ko" title="한국어">🇰🇷</button>
+                        <button class="lang-btn" data-lang="th" title="ไทย">🇹🇭</button>
+                    </div>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden"><i data-lucide="menu" class="w-6 h-6 gold-accent"></i></button>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-3">
+                <a href="our-story.html" class="block nav-link" style="color: var(--foreground);">찾아오시는 길</a>
+                <a href="gallery.html" class="block nav-link" style="color: var(--foreground);">사진첩</a>
+                <a href="guestbook.html" class="block nav-link" style="color: var(--foreground);">방명록</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="py-24 px-4 relative mt-20">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-20">
+                <p class="text-sm tracking-[0.3em] mb-4 gold-accent">TRAVEL GUIDE</p>
+                <h2 class="text-5xl font-light gold-accent">Join Us in Thailand</h2>
+                <div class="divider-luxe"></div>
+            </div>
+
+            <!-- Travel Info Timeline -->
+            <div class="relative">
+                <div class="timeline-line"></div>
+
+                <!-- 1. 결혼식 장소 -->
+                <div class="timeline-item flex flex-col items-center mb-32 relative md:h-96">
+                    <div class="md:absolute left-1/2 md:transform md:-translate-x-1/2 z-10 mb-6 md:mb-0">
+                        <div class="timeline-icon" style="border-radius: var(--radius);"><i data-lucide="map-pin" class="w-8 h-8 gold-accent"></i></div>
+                    </div>
+                    <div class="w-full md:w-5/12 mb-6 md:mb-0 md:absolute md:left-0">
+                        <img src="https://image.kkday.com/v2/image/get/q_55%2Ct_webp/s1.kkday.com/campaign_863/20190606102239_99ZZc/jpg" alt="Thailand" class="w-full" style="border-radius: var(--radius); box-shadow: var(--shadow-lg); border: 1px solid var(--primary);">
+                    </div>
+                    <div class="w-full md:w-5/12 md:absolute md:right-0">
+                        <div class="luxe-card p-8" style="box-shadow: var(--shadow-xl); border-radius: var(--radius);">
+                            <h3 class="text-base tracking-[0.2em] mb-2 category-tag">LOCATION</h3>
+                            <h4 class="text-3xl font-light mb-4">Buriram, Thailand</h4>
+                            <p class="font-light leading-relaxed mb-4" style="color: var(--card-foreground);">
+                                부리람은 태국 북동부, 이싼 지역에 위치한 전통과 현대가 조화를 이루는 주(州)입니다. 태국 부리람 주에 있는 반크루앗 군(郡)은 부리람 도시에서 1시간 떨어진 곳에 위치한 자연과 유적지가 유명한 지역입니다. 손님 분들께서는 부리람에 있는 숙소에서 머물고, 우리의 결혼식은 반크루앗 군에서 진행될 예정입니다.
+                            </p>
+                            <p class="text-sm font-light" style="color: var(--muted-foreground);">
+                                📍 12 Village No.9, Ban Kruat, Buriram, Thailand
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. 찾아오는 방법 -->
+                <div class="timeline-item flex flex-col items-center mb-32 relative md:h-auto md:min-h-96">
+                    <div class="md:absolute left-1/2 md:transform md:-translate-x-1/2 z-10 mb-6 md:mb-0">
+                        <div class="timeline-icon" style="border-radius: var(--radius);"><i data-lucide="plane" class="w-8 h-8 gold-accent"></i></div>
+                    </div>
+                    <div class="w-full md:w-5/12 mb-6 md:mb-0 md:absolute md:right-0">
+                        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=400&h=300&fit=crop" alt="Airport" class="w-full" style="border-radius: var(--radius); box-shadow: var(--shadow-lg); border: 1px solid var(--primary);">
+                    </div>
+                    <div class="w-full md:w-5/12 md:absolute md:left-0">
+                        <div class="luxe-card p-8" style="box-shadow: var(--shadow-xl); border-radius: var(--radius);">
+                            <h3 class="text-base tracking-[0.2em] mb-2 category-tag">TRANSPORTATION</h3>
+                            <h4 class="text-3xl font-light mb-4">Getting Here</h4>
+                            <p class="font-light mb-4" style="color: var(--card-foreground);">
+                                <strong>2026년 2월 28일 부리람 공항 도착편</strong>
+                            </p>
+                            <table class="flight-table">
+                                <tbody>
+                                    <tr>
+                                        <td class="text-sm">Flight 1</td>
+                                        <td class="text-sm">타이에어아시아</td>
+                                        <td class="text-sm">DMK 07:10 → BFV 08:05</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-sm">Flight 2</td>
+                                        <td class="text-sm">타이에어아시아</td>
+                                        <td class="text-sm">DMK 15:05 → BFV 16:05</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-sm">Flight 3</td>
+                                        <td class="text-sm">타이에어아시아</td>
+                                        <td class="text-sm">BKK 15:30 → BFV 16:35</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-sm font-light mt-4" style="color: var(--muted-foreground);">
+                                ✈️ 각 비행편 도착 시간에 맞춰 호텔 셔틀 차량이 운영됩니다.<br>
+                                💡 DMK: 방콕 돈므앙 공항 | BKK: 방콕 수완나품 공항
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. 숙소 -->
+                <div class="timeline-item flex flex-col items-center relative md:h-96">
+                    <div class="md:absolute left-1/2 md:transform md:-translate-x-1/2 z-10 mb-6 md:mb-0">
+                        <div class="timeline-icon" style="border-radius: var(--radius);"><i data-lucide="hotel" class="w-8 h-8 gold-accent"></i></div>
+                    </div>
+                    <div class="w-full md:w-5/12 mb-6 md:mb-0 md:absolute md:left-0">
+                        <img src="https://lh3.googleusercontent.com/p/AF1QipNCJfTBsdOZKIQgeptKAT82UBCvBG1MjXvb0Px7=w408-h271-k-no" alt="Hotel" class="w-full" style="border-radius: var(--radius); box-shadow: var(--shadow-lg); border: 1px solid var(--primary);">
+                    </div>
+                    <div class="w-full md:w-5/12 md:absolute md:right-0">
+                        <div class="luxe-card p-8" style="box-shadow: var(--shadow-xl); border-radius: var(--radius);">
+                            <h3 class="text-base tracking-[0.2em] mb-2 category-tag">ACCOMMODATION</h3>
+                            <h4 class="text-3xl font-light mb-4">Hotel de l'amour Buriram</h4>
+                            <p class="font-light leading-relaxed mb-4" style="color: var(--card-foreground);">
+                                부리람 4성급 호텔에서 편안한 휴식을 취하세요.
+                                모든 하객분들께 동일한 숙소가 제공됩니다.
+                            </p>
+                            <div class="space-y-2 text-sm font-light">
+                                <p><strong class="gold-accent">체크인:</strong> 2026년 2월 28일 (금) 14:00</p>
+                                <p><strong class="gold-accent">체크아웃:</strong> 2026년 3월 2일 (일) 12:00</p>
+                                <p class="mt-4" style="color: var(--muted-foreground);">
+                                    🏨 방문 확정 시 호텔 객실을 예약해드립니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wedding Details Section -->
+    <section class="py-24 px-4" style="background: var(--muted);">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-sm tracking-[0.3em] mb-4 gold-accent">THE BIG DAY</p>
+                <h2 class="text-5xl font-light gold-accent">Wedding Schedule</h2>
+                <div class="divider-luxe"></div>
+            </div>
+
+            <!-- Ceremony & Reception -->
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <div class="border p-8 bg-white" style="border-color: var(--primary); border-radius: var(--radius);">
+                    <i data-lucide="church" class="w-12 h-12 gold-accent mb-4"></i>
+                    <h3 class="text-3xl font-serif mb-4 gold-accent">Ceremony</h3>
+                    <div class="space-y-2 font-light">
+                        <p class="text-lg">09:00 AM</p>
+                        <p>2026년 3월 1일 (일)</p>
+                        <p class="text-sm opacity-70">12 Village No.9, Ban Kruat</p>
+                    </div>
+                </div>
+                <div class="border p-8 bg-white" style="border-color: var(--primary); border-radius: var(--radius);">
+                    <i data-lucide="champagne-glass" class="w-12 h-12 gold-accent mb-4"></i>
+                    <h3 class="text-3xl font-serif mb-4 gold-accent">Reception</h3>
+                    <div class="space-y-2 font-light">
+                        <p class="text-lg">Ceremony 종료 후</p>
+                        <p>야외 리셉션</p>
+                        <p class="text-sm opacity-70">동일 장소</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dress Code & Tips -->
+            <div class="border p-8 mb-16 bg-white" style="border-color: var(--primary); border-radius: var(--radius);">
+                <h3 class="text-3xl font-serif mb-6 gold-accent flex items-center gap-3">
+                    <i data-lucide="shirt" class="w-8 h-8"></i> Dress Code & Tips
+                </h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-xl mb-3 gold-accent">Dress Code</h4>
+                        <p class="font-light mb-2">White, Purple, Gold</p>
+                        <p class="text-sm opacity-70">야외 세레모니를 고려하여 편안한 복장을 추천합니다.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-xl mb-3 gold-accent">Recommended Items</h4>
+                        <ul class="space-y-2 text-sm font-light">
+                            <li>☀️ 선글라스 & 모자 (태양이 강합니다)</li>
+                            <li>🧴 썬크림 (SPF 50+ 권장)</li>
+                            <li>👟 편한 신발 (야외 행사)</li>
+                            <li>💧 개인 물병 (수분 보충)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ -->
+            <div class="border p-8 bg-white" style="border-color: var(--primary); border-radius: var(--radius);">
+                <h3 class="text-3xl font-serif mb-6 gold-accent">FAQ</h3>
+                <div class="space-y-6">
+                    <div>
+                        <strong class="gold-accent">Q: 태국 날씨는 어떤가요?</strong>
+                        <p class="mt-2 font-light">A: 3월은 건기로 평균 기온 28-32°C입니다. 햇볕이 강하니 자외선 차단에 유의하세요.</p>
+                    </div>
+                    <div>
+                        <strong class="gold-accent">Q: 현지 통화는?</strong>
+                        <p class="mt-2 font-light">A: 태국 바트(THB). 1,000 바트 ≈ 약 42,000원 (환율 변동). 공항이나 호텔에서 환전 가능합니다.</p>
+                    </div>
+                    <div>
+                        <strong class="gold-accent">Q: 비자가 필요한가요?</strong>
+                        <p class="mt-2 font-light">A: 한국 여권 소지자는 30일 무비자 입국이 가능합니다. (관광 목적)</p>
+                    </div>
+                    <div>
+                        <strong class="gold-accent">Q: 영어가 통하나요?</strong>
+                        <p class="mt-2 font-light">A: 부리람은 관광지가 아니라 영어가 잘 통하지 않을 수 있습니다. 필요시 통역 지원이 가능합니다.</p>
+                    </div>
+                    <div>
+                        <strong class="gold-accent">Q: 축의금은 어떻게 하나요?</strong>
+                        <p class="mt-2 font-light">A: 방명록 페이지를 참고해주세요. 축의금은 현장에서 주는 것보다 계좌이체를 더 추천드립니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="assets/js/navigation.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Details - Sarah & Michael</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/classic_luxe_theme.css">
+    <style>
+        body { font-family: var(--font-sans) !important; background: var(--background) !important; color: var(--foreground) !important; }
+        h1, h2, h3 { font-family: var(--font-serif) !important; }
+        .gold-accent { color: var(--primary); }
+        .nav-link.active { color: var(--primary) !important; }
+        .divider-luxe { width: 100px; height: 1px; background: var(--primary); margin: 2rem auto; position: relative; }
+        .divider-luxe::before, .divider-luxe::after { content: ''; position: absolute; width: 8px; height: 8px; background: var(--primary); transform: rotate(45deg); top: -3.5px; }
+        .divider-luxe::before { left: -4px; } .divider-luxe::after { right: -4px; }
+    </style>
+</head>
+<body class="min-h-screen">
+    <nav class="fixed top-0 w-full z-50 bg-opacity-95" style="background: var(--background);">
+        <div class="max-w-7xl mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="text-2xl gold-accent font-serif">S & M</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="our-story.html" class="nav-link hover:text-opacity-80 transition" style="color: var(--foreground);">Our Story</a>
+                    <a href="details.html" class="nav-link hover:text-opacity-80 transition" style="color: var(--foreground);">Details</a>
+                    <a href="gallery.html" class="nav-link hover:text-opacity-80 transition" style="color: var(--foreground);">사진첩</a>
+                    <a href="guestbook.html" class="nav-link hover:text-opacity-80 transition" style="color: var(--foreground);">방명록</a>
+                    <a href="registry.html" class="nav-link hover:text-opacity-80 transition" style="color: var(--foreground);">Registry</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden"><i data-lucide="menu" class="w-6 h-6 gold-accent"></i></button>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-3">
+                <a href="our-story.html" class="block nav-link" style="color: var(--foreground);">Our Story</a>
+                <a href="details.html" class="block nav-link" style="color: var(--foreground);">Details</a>
+                <a href="gallery.html" class="block nav-link" style="color: var(--foreground);">사진첩</a>
+                <a href="guestbook.html" class="block nav-link" style="color: var(--foreground);">방명록</a>
+                <a href="registry.html" class="block nav-link" style="color: var(--foreground);">Registry</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="py-24 px-4 mt-20">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-sm tracking-[0.3em] mb-4 gold-accent">WEDDING INFORMATION</p>
+                <h1 class="text-5xl font-light gold-accent">Event Details</h1>
+                <div class="divider-luxe"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 mb-16">
+                <div class="border p-8" style="border-color: var(--primary); border-radius: var(--radius);">
+                    <i data-lucide="church" class="w-12 h-12 gold-accent mb-4"></i>
+                    <h2 class="text-3xl font-serif mb-4 gold-accent">Ceremony</h2>
+                    <div class="space-y-2 font-light">
+                        <p class="text-lg">Four O'Clock in the Evening</p>
+                        <p>The Grand Estate at Rosewood</p>
+                        <p class="text-sm opacity-70">123 Luxury Lane, Rosewood Estate</p>
+                    </div>
+                </div>
+                <div class="border p-8" style="border-color: var(--primary); border-radius: var(--radius);">
+                    <i data-lucide="champagne-glass" class="w-12 h-12 gold-accent mb-4"></i>
+                    <h2 class="text-3xl font-serif mb-4 gold-accent">Reception</h2>
+                    <div class="space-y-2 font-light">
+                        <p class="text-lg">Six O'Clock in the Evening</p>
+                        <p>The Grand Ballroom</p>
+                        <p class="text-sm opacity-70">Same Venue - The Grand Estate</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-16 p-8 border" style="border-color: var(--primary); border-radius: var(--radius); background: var(--muted);">
+                <h2 class="text-3xl font-serif mb-6 gold-accent flex items-center gap-3"><i data-lucide="map-pin" class="w-8 h-8"></i> Location & Directions</h2>
+                <p class="mb-4">The Grand Estate at Rosewood, 123 Luxury Lane</p>
+                <div class="bg-gray-700 h-64 rounded flex items-center justify-center">
+                    <p class="opacity-50">Map Placeholder (Integrate Google Maps)</p>
+                </div>
+                <div class="mt-6 space-y-2 text-sm opacity-70">
+                    <p><strong>Parking:</strong> Valet parking available at the main entrance</p>
+                    <p><strong>From Airport:</strong> 25 minutes via Highway 101 South</p>
+                </div>
+            </div>
+
+            <div class="mb-16">
+                <h2 class="text-3xl font-serif mb-8 gold-accent text-center">Accommodation</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="border p-6 text-center" style="border-color: var(--primary); border-radius: var(--radius);">
+                        <i data-lucide="hotel" class="w-10 h-10 gold-accent mx-auto mb-3"></i>
+                        <h3 class="font-serif text-xl mb-2">The Rosewood Hotel</h3>
+                        <p class="text-sm opacity-70 mb-2">Walking distance from venue</p>
+                        <p class="text-sm">Special rate: $250/night</p>
+                    </div>
+                    <div class="border p-6 text-center" style="border-color: var(--primary); border-radius: var(--radius);">
+                        <i data-lucide="hotel" class="w-10 h-10 gold-accent mx-auto mb-3"></i>
+                        <h3 class="font-serif text-xl mb-2">Grand Plaza Inn</h3>
+                        <p class="text-sm opacity-70 mb-2">5 minutes drive</p>
+                        <p class="text-sm">Special rate: $180/night</p>
+                    </div>
+                    <div class="border p-6 text-center" style="border-color: var(--primary); border-radius: var(--radius);">
+                        <i data-lucide="hotel" class="w-10 h-10 gold-accent mx-auto mb-3"></i>
+                        <h3 class="font-serif text-xl mb-2">Luxury Suites</h3>
+                        <p class="text-sm opacity-70 mb-2">10 minutes drive</p>
+                        <p class="text-sm">Special rate: $320/night</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border p-8" style="border-color: var(--primary); border-radius: var(--radius);">
+                <h2 class="text-3xl font-serif mb-6 gold-accent">FAQ</h2>
+                <div class="space-y-4">
+                    <div><strong class="gold-accent">Q: What is the dress code?</strong><p class="mt-1">Black Tie. Formal evening attire is requested.</p></div>
+                    <div><strong class="gold-accent">Q: Can I bring a plus one?</strong><p class="mt-1">Please refer to your invitation for guest allowance.</p></div>
+                    <div><strong class="gold-accent">Q: Will there be transportation?</strong><p class="mt-1">Shuttle service will be provided from major hotels.</p></div>
+                    <div><strong class="gold-accent">Q: Is the venue accessible?</strong><p class="mt-1">Yes, the venue is fully wheelchair accessible.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="assets/js/navigation.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

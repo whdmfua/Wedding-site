@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조으렴 & 짙라다 사동 - Wedding</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/classic_luxe_theme.css">
+    <style>
+        body { font-family: var(--font-sans) !important; background: var(--background) !important; color: var(--foreground) !important; }
+        h1, h2, h3, h4 { font-family: var(--font-serif) !important; }
+        .gold-accent { color: var(--primary); text-shadow: 0 0 20px rgba(180, 149, 112, 0.3); }
+        .nav-link.active { color: var(--primary) !important; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in-up { animation: fadeInUp 1s ease-out forwards; }
+        .divider-luxe { width: 100px; height: 1px; background: var(--primary); margin: 2rem auto; position: relative; }
+        .divider-luxe::before, .divider-luxe::after { content: ''; position: absolute; width: 8px; height: 8px; background: var(--primary); transform: rotate(45deg); top: -3.5px; }
+        .divider-luxe::before { left: -4px; } .divider-luxe::after { right: -4px; }
+        .language-switcher { display: flex; align-items: center; gap: 0.5rem; }
+        .lang-btn { background: none; border: none; cursor: pointer; font-size: 1.5rem; transition: all 0.3s; opacity: 0.5; filter: grayscale(100%); }
+        .lang-btn:hover { opacity: 0.8; filter: grayscale(50%); }
+        .lang-btn.active { opacity: 1; filter: grayscale(0%); transform: scale(1.1); }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-opacity-95" style="background: var(--background);">
+        <div class="max-w-7xl mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <a href="index.html" class="text-2xl gold-accent font-serif">J & J</a>
+                    <div class="language-switcher md:hidden">
+                        <button class="lang-btn active" data-lang="ko" title="한국어">🇰🇷</button>
+                        <button class="lang-btn" data-lang="th" title="ไทย">🇹🇭</button>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="our-story.html" class="nav-link hover:text-opacity-80 transition" style="color: var(--foreground);">찾아오시는 길</a>
+                    <a href="gallery.html" class="nav-link hover:text-opacity-80 transition" style="color: var(--foreground);">사진첩</a>
+                    <a href="guestbook.html" class="nav-link hover:text-opacity-80 transition" style="color: var(--foreground);">방명록</a>
+                    <div class="language-switcher">
+                        <button class="lang-btn active" data-lang="ko" title="한국어">🇰🇷</button>
+                        <button class="lang-btn" data-lang="th" title="ไทย">🇹🇭</button>
+                    </div>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden">
+                    <i data-lucide="menu" class="w-6 h-6 gold-accent"></i>
+                </button>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-3">
+                <a href="our-story.html" class="block nav-link" style="color: var(--foreground);">찾아오시는 길</a>
+                <a href="gallery.html" class="block nav-link" style="color: var(--foreground);">사진첩</a>
+                <a href="guestbook.html" class="block nav-link" style="color: var(--foreground);">방명록</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center mt-20">
+        <div class="text-center px-4 fade-in-up">
+            <p class="text-sm tracking-[0.3em] mb-8 gold-accent">THE WEDDING OF</p>
+            <h1 class="text-3xl md:text-9xl font-light mb-8 gold-accent">조으렴 & 짙라다 사동</h1>
+            <div class="divider-luxe"></div>
+            <p class="text-2xl md:text-3xl font-light tracking-wider mt-8">2026년 3월 1일(일)</p>
+            <p class="text-xl tracking-[0.2em] mt-4 opacity-70">Dress Code : White, Purple, Gold</p>
+        </div>
+    </section>
+
+    <!-- Quick Info Section -->
+    <section class="py-24 px-4">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+            <div class="text-center p-8 border border-opacity-30" style="border-color: var(--primary); border-radius: var(--radius);">
+                <i data-lucide="calendar" class="w-12 h-12 mx-auto mb-4 gold-accent"></i>
+                <h3 class="text-xl font-serif mb-2 gold-accent">Date</h3>
+                <p>2026년 3월 1일</p>
+                <p class="text-sm opacity-70 mt-2">일요일 09:00 AM</p>
+            </div>
+            <div class="text-center p-8 border border-opacity-30" style="border-color: var(--primary); border-radius: var(--radius);">
+                <i data-lucide="map-pin" class="w-12 h-12 mx-auto mb-4 gold-accent"></i>
+                <h3 class="text-xl font-serif mb-2 gold-accent">Venue</h3>
+                <p>12 Village No.9</p>
+                <p class="text-sm opacity-70 mt-2">Ban Kruat, Buriram, Thailand</p>
+            </div>
+            <div class="text-center p-8 border border-opacity-30" style="border-color: var(--primary); border-radius: var(--radius);">
+                <i data-lucide="shirt" class="w-12 h-12 mx-auto mb-4 gold-accent"></i>
+                <h3 class="text-xl font-serif mb-2 gold-accent">Dress Code</h3>
+                <p>White, Purple, Gold</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Countdown Timer -->
+    <section class="py-24 px-4" style="background: var(--muted);">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl font-serif mb-8 gold-accent">Until We Say "I Do"</h2>
+            <div id="countdown" class="grid grid-cols-4 gap-4 md:gap-8">
+                <div><div class="text-4xl md:text-6xl gold-accent" id="days">0</div><div class="mt-2 text-sm opacity-70">DAYS</div></div>
+                <div><div class="text-4xl md:text-6xl gold-accent" id="hours">0</div><div class="mt-2 text-sm opacity-70">HOURS</div></div>
+                <div><div class="text-4xl md:text-6xl gold-accent" id="minutes">0</div><div class="mt-2 text-sm opacity-70">MINUTES</div></div>
+                <div><div class="text-4xl md:text-6xl gold-accent" id="seconds">0</div><div class="mt-2 text-sm opacity-70">SECONDS</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 px-4">
+        <div class="max-w-4xl mx-auto text-center space-y-8">
+            <h2 class="text-4xl font-serif gold-accent">Join Our Celebration</h2>
+            <div class="divider-luxe"></div>
+            <div class="flex flex-col md:flex-row gap-4 justify-center mt-8">
+                <a href="guestbook.html" class="px-12 py-4 font-light tracking-[0.2em] transition-all hover:shadow-2xl" style="background: var(--primary); color: var(--primary-foreground); border-radius: var(--radius);">방명록 작성하기</a>
+                <a href="guestbook.html#account-section" class="px-12 py-4 font-light tracking-[0.2em] transition-all border hover:bg-opacity-10" style="border-color: var(--primary); color: var(--primary); border-radius: var(--radius);">계좌번호 보기</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 border-t" style="border-color: var(--border);">
+        <div class="max-w-6xl mx-auto text-center">
+            <p class="text-sm opacity-70">© 2025 Jo Euryeom. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/navigation.js"></script>
+    <script>
+        lucide.createIcons();
+
+        // Countdown Timer
+        const wedding = new Date('2026-03-01T09:00:00').getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const distance = wedding - now;
+            document.getElementById('days').innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('minutes').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('seconds').innerText = Math.floor((distance % (1000 * 60)) / 1000);
+        }, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เรื่องราวของเรา - Mr.Jo Euryeom & นางสาว จิตรลดา ซาดง</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&family=Sarabun:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/classic_luxe_theme.css">
+    <style>
+        body { font-family: var(--font-sans) !important; background: var(--background) !important; color: var(--foreground) !important; }
+        h1, h2, h3, h4 { font-family: var(--font-serif) !important; }
+        .gold-accent { color: var(--primary); text-shadow: 0 0 20px rgba(180, 149, 112, 0.3); }
+        .nav-link.active { color: var(--primary) !important; }
+        .divider-luxe { width: 100px; height: 1px; background: var(--primary); margin: 2rem auto; position: relative; }
+        .divider-luxe::before, .divider-luxe::after { content: ''; position: absolute; width: 8px; height: 8px; background: var(--primary); transform: rotate(45deg); top: -3.5px; }
+        .divider-luxe::before { left: -4px; } .divider-luxe::after { right: -4px; }
+        .luxe-card { background: var(--card); border: 1px solid var(--primary); position: relative; overflow: hidden; }
+        .luxe-card::before { content: ''; position: absolute; top: -50%; right: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent 30%, rgba(180, 149, 112, 0.05) 50%, transparent 70%); transform: rotate(45deg); animation: shimmer 3s infinite; }
+        @keyframes shimmer { 0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); } 100% { transform: translateX(100%) translateY(100%) rotate(45deg); } }
+        .language-switcher { display: flex; align-items: center; gap: 0.5rem; }
+        .lang-btn { background: none; border: none; cursor: pointer; font-size: 1.5rem; transition: all 0.3s; opacity: 0.5; filter: grayscale(100%); }
+        .lang-btn:hover { opacity: 0.8; filter: grayscale(50%); }
+        .lang-btn.active { opacity: 1; filter: grayscale(0%); transform: scale(1.1); }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-opacity-95" style="background: var(--background);">
+        <div class="max-w-7xl mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <a href="index-th.html" class="text-2xl gold-accent font-serif">J & J</a>
+                    <div class="language-switcher md:hidden">
+                        <button class="lang-btn" data-lang="ko" title="한국어">🇰🇷</button>
+                        <button class="lang-btn active" data-lang="th" title="ไทย">🇹🇭</button>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="our-story-th.html" class="nav-link hover:text-opacity-80 transition" style="color: var(--foreground);">ข้อมูลงานแต่งงาน</a>
+                    <a href="gallery-th.html" class="nav-link hover:text-opacity-80 transition" style="color: var(--foreground);">อัลบั้มรูปภาพ</a>
+                    <a href="guestbook-th.html" class="nav-link hover:text-opacity-80 transition" style="color: var(--foreground);">สมุดเยี่ยม</a>
+                    <div class="language-switcher">
+                        <button class="lang-btn" data-lang="ko" title="한국어">🇰🇷</button>
+                        <button class="lang-btn active" data-lang="th" title="ไทย">🇹🇭</button>
+                    </div>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden"><i data-lucide="menu" class="w-6 h-6 gold-accent"></i></button>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-3">
+                <a href="our-story-th.html" class="block nav-link" style="color: var(--foreground);">ข้อมูลงานแต่งงาน</a>
+                <a href="gallery-th.html" class="block nav-link" style="color: var(--foreground);">อัลบั้มรูปภาพ</a>
+                <a href="guestbook-th.html" class="block nav-link" style="color: var(--foreground);">สมุดเยี่ยม</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Wedding Details Section -->
+    <section class="py-24 px-4 mt-20">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-sm tracking-[0.3em] mb-4 gold-accent">THE BIG DAY</p>
+                <h2 class="text-5xl font-light gold-accent">รายละเอียดงานแต่งงาน</h2>
+                <div class="divider-luxe"></div>
+            </div>
+
+            <!-- Ceremony & Reception -->
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <div class="luxe-card border p-8" style="border-color: var(--primary); border-radius: var(--radius); background: var(--card);">
+                    <i data-lucide="calendar" class="w-12 h-12 gold-accent mb-4"></i>
+                    <h3 class="text-3xl font-serif mb-4 gold-accent">งานพิธีแต่งงาน</h3>
+                    <div class="space-y-3 font-light">
+                        <div>
+                            <p class="text-sm opacity-70 mb-1">วันที่</p>
+                            <p class="text-lg">1 มีนาคม 2026 (1 มีนาคม พ.ศ. 2569)</p>
+                            <p class="text-sm opacity-70">ตรงกับ วันที่ 2 เดือน 2 ตามจันทรคติ</p>
+                        </div>
+                        <div>
+                            <p class="text-sm opacity-70 mb-1">เวลา</p>
+                            <p class="text-lg">เช้า 9:00 น. - สาย 11:00 น.</p>
+                        </div>
+                        <div>
+                            <p class="text-sm opacity-70 mb-1">สถานที่</p>
+                            <p>หมู่บ้านซาดง</p>
+                            <p class="text-sm opacity-70">อำเภอละหานทราย, จังหวัดบุรีรัมย์</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="luxe-card border p-8" style="border-color: var(--primary); border-radius: var(--radius); background: var(--card);">
+                    <i data-lucide="utensils" class="w-12 h-12 gold-accent mb-4"></i>
+                    <h3 class="text-3xl font-serif mb-4 gold-accent">งานเลี้ยง</h3>
+                    <div class="space-y-3 font-light">
+                        <div>
+                            <p class="text-sm opacity-70 mb-1">เวลา</p>
+                            <p class="text-lg">กลางวัน 12:00 น. - บ่าย 3:00 น.</p>
+                        </div>
+                        <div>
+                            <p class="text-sm opacity-70 mb-1">สถานที่</p>
+                            <p>หมู่บ้านซาดง</p>
+                            <p class="text-sm opacity-70">สถานที่เดียวกับพิธี</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dress Code -->
+            <div class="luxe-card border p-8" style="border-color: var(--primary); border-radius: var(--radius); background: var(--card);">
+                <h3 class="text-3xl font-serif mb-6 gold-accent flex items-center gap-3">
+                    <i data-lucide="shirt" class="w-8 h-8"></i> Dress Code
+                </h3>
+                <div>
+                    <p class="font-light mb-4 text-lg">เราขอแนะนำให้แต่งกายด้วยโทนสีอ่อน ๆ สำหรับงานแต่งของเรา</p>
+                    <div class="mt-4">
+                        <h4 class="text-xl mb-3 gold-accent">โทนสีที่แนะนำ:</h4>
+                        <ul class="space-y-2 font-light text-lg">
+                            <li>• ครีม (Cream)</li>
+                            <li>• เบจ (Beige)</li>
+                            <li>• พาสเทล (Pastel)</li>
+                            <li>• สีขาว (White)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 border-t" style="border-color: var(--border);">
+        <div class="max-w-6xl mx-auto text-center">
+            <p class="text-sm opacity-70">© 2025 Mr.Jo Euryeom & นางสาว จิตรลดา ซาดง. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/navigation.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

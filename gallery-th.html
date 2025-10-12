@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>อัลบั้มรูปภาพ - Mr.Jo Euryeom & นางสาว จิตรลดา ซาดง</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&family=Sarabun:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/classic_luxe_theme.css">
+    <style>
+        body { font-family: var(--font-sans) !important; background: var(--background) !important; color: var(--foreground) !important; }
+        h1, h2 { font-family: var(--font-serif) !important; }
+        .gold-accent { color: var(--primary); }
+        .nav-link.active { color: var(--primary) !important; }
+        .divider-luxe { width: 100px; height: 1px; background: var(--primary); margin: 2rem auto; position: relative; }
+        .divider-luxe::before, .divider-luxe::after { content: ''; position: absolute; width: 8px; height: 8px; background: var(--primary); transform: rotate(45deg); top: -3.5px; }
+        .divider-luxe::before { left: -4px; } .divider-luxe::after { right: -4px; }
+        .gallery-item { position: relative; overflow: hidden; cursor: pointer; transition: transform 0.3s; }
+        .gallery-item:hover { transform: scale(1.05); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+        .lightbox { display: none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; }
+        .lightbox.active { display: flex; }
+        .lightbox img { max-width: 90%; max-height: 90%; border: 2px solid var(--primary); }
+        .language-switcher { display: flex; align-items: center; gap: 0.5rem; }
+        .lang-btn { background: none; border: none; cursor: pointer; font-size: 1.5rem; transition: all 0.3s; opacity: 0.5; filter: grayscale(100%); }
+        .lang-btn:hover { opacity: 0.8; filter: grayscale(50%); }
+        .lang-btn.active { opacity: 1; filter: grayscale(0%); transform: scale(1.1); }
+    </style>
+</head>
+<body class="min-h-screen">
+    <nav class="fixed top-0 w-full z-50 bg-opacity-95" style="background: var(--background);">
+        <div class="max-w-7xl mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <a href="index-th.html" class="text-2xl gold-accent font-serif">J & J</a>
+                    <div class="language-switcher md:hidden">
+                        <button class="lang-btn" data-lang="ko" title="한국어">🇰🇷</button>
+                        <button class="lang-btn active" data-lang="th" title="ไทย">🇹🇭</button>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="our-story-th.html" class="nav-link hover:text-opacity-80 transition" style="color: var(--foreground);">ข้อมูลงานแต่งงาน</a>
+                    <a href="gallery-th.html" class="nav-link hover:text-opacity-80 transition" style="color: var(--foreground);">อัลบั้มรูปภาพ</a>
+                    <a href="guestbook-th.html" class="nav-link hover:text-opacity-80 transition" style="color: var(--foreground);">สมุดเยี่ยม</a>
+                    <div class="language-switcher">
+                        <button class="lang-btn" data-lang="ko" title="한국어">🇰🇷</button>
+                        <button class="lang-btn active" data-lang="th" title="ไทย">🇹🇭</button>
+                    </div>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden"><i data-lucide="menu" class="w-6 h-6 gold-accent"></i></button>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-3">
+                <a href="our-story-th.html" class="block nav-link" style="color: var(--foreground);">ข้อมูลงานแต่งงาน</a>
+                <a href="gallery-th.html" class="block nav-link" style="color: var(--foreground);">อัลบั้มรูปภาพ</a>
+                <a href="guestbook-th.html" class="block nav-link" style="color: var(--foreground);">สมุดเยี่ยม</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="py-24 px-4 mt-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-sm tracking-[0.3em] mb-4 gold-accent">OUR MEMORIES TOGETHER</p>
+                <h1 class="text-5xl font-light gold-accent">อัลบั้มรูปภาพ</h1>
+                <div class="divider-luxe"></div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="gallery-item h-64" onclick="openLightbox(this)">
+                    <img src="https://lh3.googleusercontent.com/d/189ViIRFO78Hsj-Qwn2pvxsiKT6tdn-j1" alt="Gallery 1">
+                </div>
+                <div class="gallery-item h-64" onclick="openLightbox(this)">
+                    <img src="https://lh3.googleusercontent.com/d/1KRvX4Sm2ViK88sxGYuJQhio9w7S9mkwM" alt="Gallery 2">
+                </div>
+                <div class="gallery-item h-64" onclick="openLightbox(this)">
+                    <img src="https://lh3.googleusercontent.com/d/1tAFM90nsBSO1IFs8JlnrI_gcLg9wKOdu" alt="Gallery 3">
+                </div>
+                <div class="gallery-item h-64" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=400&h=400&fit=crop" alt="Gallery 4">
+                </div>
+                <div class="gallery-item h-64" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=400&h=400&fit=crop" alt="Gallery 5">
+                </div>
+                <div class="gallery-item h-64" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400&h=400&fit=crop" alt="Gallery 6">
+                </div>
+                <div class="gallery-item h-64" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=400&h=400&fit=crop" alt="Gallery 7">
+                </div>
+                <div class="gallery-item h-64" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=400&h=400&fit=crop" alt="Gallery 8">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 border-t" style="border-color: var(--border);">
+        <div class="max-w-6xl mx-auto text-center">
+            <p class="text-sm opacity-70">© 2025 Mr.Jo Euryeom & นางสาว จิตรลดา ซาดง. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <button class="absolute top-8 right-8 text-white text-4xl" onclick="closeLightbox()">&times;</button>
+        <img id="lightbox-img" src="" alt="Lightbox">
+    </div>
+
+    <script src="assets/js/navigation.js"></script>
+    <script>
+        lucide.createIcons();
+        function openLightbox(el) {
+            document.getElementById('lightbox').classList.add('active');
+            document.getElementById('lightbox-img').src = el.querySelector('img').src;
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+    </script>
+</body>
+</html>

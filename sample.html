@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarah & Michael - Modern Minimalist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+:root {
+  --background: #ffffff;
+  --foreground: #231f1a;
+  --card: #ffffff;
+  --card-foreground: #231f1a;
+  --popover: #ffffff;
+  --popover-foreground: #231f1a;
+  --primary: #231f1a;
+  --primary-foreground: #ffffff;
+  --secondary: #b49570;
+  --secondary-foreground: #ffffff;
+  --muted: #e8e8e0;
+  --muted-foreground: #6b6560;
+  --accent: #b49570;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #e5e5e5;
+  --input: #e5e5e5;
+  --ring: #231f1a;
+  --chart-1: #231f1a;
+  --chart-2: #b49570;
+  --chart-3: #e8e8e0;
+  --chart-4: #6b6560;
+  --chart-5: #d4c4b0;
+  --sidebar: #fafafa;
+  --sidebar-foreground: #231f1a;
+  --sidebar-primary: #231f1a;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #b49570;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #e5e5e5;
+  --sidebar-ring: #231f1a;
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --radius: 0px;
+  --shadow-2xs: 0 1px 2px 0px rgba(0, 0, 0, 0.02);
+  --shadow-xs: 0 1px 3px 0px rgba(0, 0, 0, 0.03);
+  --shadow-sm: 0 1px 2px 0px rgba(0, 0, 0, 0.05);
+  --shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+</style>
+    <style>
+        body {
+            font-family: var(--font-sans) !important;
+            background: var(--background) !important;
+            color: var(--foreground) !important;
+        }
+        .timeline-line {
+            background: var(--foreground);
+            width: 1px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            bottom: 0;
+        }
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--foreground);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .timeline-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--background);
+            border: 2px solid var(--foreground);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        .slide-in {
+            animation: slideIn 0.6s ease-out forwards;
+        }
+        .timeline-item {
+            opacity: 0;
+            animation: slideIn 0.6s ease-out forwards;
+        }
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .hover-lift {
+            transition: transform 0.2s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-4px);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Hero Banner -->
+    <section class="h-screen flex items-center justify-center">
+        <div class="text-center px-4 slide-in">
+            <h1 class="text-5xl md:text-7xl font-light tracking-tight mb-4">
+                SARAH & MICHAEL
+            </h1>
+            <div class="w-24 h-px mx-auto mb-4" style="background: var(--secondary);"></div>
+            <p class="text-xl font-light tracking-widest" style="color: var(--secondary);">
+                06.15.2025
+            </p>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="py-24 px-4 relative">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-light text-center mb-24 tracking-wide">OUR STORY</h2>
+            
+            <div class="relative">
+                <div class="timeline-line"></div>
+                
+                <!-- How We Met -->
+                <div class="timeline-item grid md:grid-cols-2 gap-8 mb-24 relative items-center">
+                    <div class="text-right">
+                        <div class="p-8">
+                            <h3 class="text-sm font-medium tracking-widest mb-2" style="color: var(--secondary);">2019</h3>
+                            <h4 class="text-2xl font-light mb-4">First Meeting</h4>
+                            <p class="text-gray-600 font-light leading-relaxed">
+                                A chance encounter at a local coffee shop. Two strangers, one spilled latte, 
+                                and the beginning of something beautiful.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 z-10">
+                        <div class="timeline-icon">
+                            <i data-lucide="coffee" class="w-5 h-5"></i>
+                        </div>
+                    </div>
+                    <div class="pl-8">
+                        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=250&fit=crop" 
+                             alt="Coffee shop" 
+                             class="w-full hover-lift">
+                    </div>
+                </div>
+
+                <!-- The Proposal -->
+                <div class="timeline-item grid md:grid-cols-2 gap-8 mb-24 relative items-center">
+                    <div class="order-2 md:order-1 pr-8">
+                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&h=250&fit=crop" 
+                             alt="Proposal" 
+                             class="w-full hover-lift">
+                    </div>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 z-10">
+                        <div class="timeline-icon">
+                            <i data-lucide="gem" class="w-5 h-5"></i>
+                        </div>
+                    </div>
+                    <div class="order-1 md:order-2 text-left">
+                        <div class="p-8">
+                            <h3 class="text-sm font-medium tracking-widest mb-2" style="color: var(--secondary);">2023</h3>
+                            <h4 class="text-2xl font-light mb-4">The Question</h4>
+                            <p class="text-gray-600 font-light leading-relaxed">
+                                Four years later, at the same coffee shop, a different kind of surprise. 
+                                One knee, one ring, one yes.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wedding Day -->
+                <div class="timeline-item grid md:grid-cols-2 gap-8 relative items-center">
+                    <div class="text-right">
+                        <div class="p-8">
+                            <h3 class="text-sm font-medium tracking-widest mb-2" style="color: var(--secondary);">2025</h3>
+                            <h4 class="text-2xl font-light mb-6">The Celebration</h4>
+                            <div class="space-y-2 text-sm">
+                                <p class="font-light">CEREMONY / 4:00 PM</p>
+                                <p class="font-light">RECEPTION / 6:00 PM</p>
+                                <p class="font-light">THE MODERN / DOWNTOWN</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 z-10">
+                        <div class="timeline-icon">
+                            <i data-lucide="calendar" class="w-5 h-5"></i>
+                        </div>
+                    </div>
+                    <div class="pl-8">
+                        <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=400&h=250&fit=crop" 
+                             alt="Wedding venue" 
+                             class="w-full hover-lift">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section class="py-24 px-4" style="background: var(--muted);">
+        <div class="max-w-xl mx-auto">
+            <h2 class="text-4xl font-light text-center mb-16 tracking-wide">RSVP</h2>
+            
+            <form class="space-y-8">
+                <div>
+                    <input type="text" 
+                           class="w-full px-0 py-3 bg-transparent border-0 border-b focus:outline-none focus:border-b-2 transition-all" 
+                           style="border-color: var(--border);"
+                           placeholder="FULL NAME">
+                </div>
+                
+                <div>
+                    <input type="email" 
+                           class="w-full px-0 py-3 bg-transparent border-0 border-b focus:outline-none focus:border-b-2 transition-all" 
+                           style="border-color: var(--border);"
+                           placeholder="EMAIL ADDRESS">
+                </div>
+                
+                <div class="flex space-x-8">
+                    <label class="flex items-center cursor-pointer">
+                        <input type="radio" name="attendance" value="yes" class="mr-3">
+                        <span class="font-light">ACCEPTS</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                        <input type="radio" name="attendance" value="no" class="mr-3">
+                        <span class="font-light">DECLINES</span>
+                    </label>
+                </div>
+                
+                <div>
+                    <select class="w-full px-0 py-3 bg-transparent border-0 border-b focus:outline-none focus:border-b-2 transition-all appearance-none" 
+                            style="border-color: var(--border);">
+                        <option>NUMBER OF GUESTS</option>
+                        <option>1 GUEST</option>
+                        <option>2 GUESTS</option>
+                        <option>3 GUESTS</option>
+                        <option>4 GUESTS</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <textarea class="w-full px-0 py-3 bg-transparent border-0 border-b focus:outline-none focus:border-b-2 transition-all resize-none" 
+                              rows="3" 
+                              style="border-color: var(--border);"
+                              placeholder="DIETARY RESTRICTIONS OR NOTES"></textarea>
+                </div>
+                
+                <button type="submit" 
+                        class="w-full py-4 font-light tracking-widest transition-all hover:bg-opacity-90"
+                        style="background: var(--foreground); color: var(--background);">
+                    SUBMIT
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
+
+Above is the design implementation. Please use this as a reference to create a similar component. Focus on clean, maintainable code structure.

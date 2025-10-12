@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registry - Sarah & Michael</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/classic_luxe_theme.css">
+    <style>
+        body { font-family: var(--font-sans) !important; background: var(--background) !important; color: var(--foreground) !important; }
+        h1, h2, h3 { font-family: var(--font-serif) !important; }
+        .gold-accent { color: var(--primary); }
+        .nav-link.active { color: var(--primary) !important; }
+        .divider-luxe { width: 100px; height: 1px; background: var(--primary); margin: 2rem auto; position: relative; }
+        .divider-luxe::before, .divider-luxe::after { content: ''; position: absolute; width: 8px; height: 8px; background: var(--primary); transform: rotate(45deg); top: -3.5px; }
+        .divider-luxe::before { left: -4px; } .divider-luxe::after { right: -4px; }
+    </style>
+</head>
+<body class="min-h-screen">
+    <nav class="fixed top-0 w-full z-50 bg-opacity-95" style="background: var(--background);">
+        <div class="max-w-7xl mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="text-2xl gold-accent font-serif">J & J</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="our-story.html" class="nav-link hover:text-opacity-80 transition" style="color: var(--foreground);">우리의 이야기</a>
+                    <a href="gallery.html" class="nav-link hover:text-opacity-80 transition" style="color: var(--foreground);">사진첩</a>
+                    <a href="guestbook.html" class="nav-link hover:text-opacity-80 transition" style="color: var(--foreground);">방명록</a>
+                    <a href="account.html" class="nav-link hover:text-opacity-80 transition" style="color: var(--foreground);">Account</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden"><i data-lucide="menu" class="w-6 h-6 gold-accent"></i></button>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-3">
+                <a href="our-story.html" class="block nav-link" style="color: var(--foreground);">우리의 이야기</a>
+                <a href="gallery.html" class="block nav-link" style="color: var(--foreground);">사진첩</a>
+                <a href="guestbook.html" class="block nav-link" style="color: var(--foreground);">방명록</a>
+                <a href="account.html" class="block nav-link" style="color: var(--foreground);">Account</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="py-24 px-4 mt-20">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-sm tracking-[0.3em] mb-4 gold-accent">YOUR PRESENCE IS THE GREATEST GIFT</p>
+                <h1 class="text-5xl font-light gold-accent">Registry</h1>
+                <div class="divider-luxe"></div>
+                <p class="mt-6 font-light leading-relaxed max-w-2xl mx-auto">Your presence at our wedding is the greatest gift of all. However, if you wish to honor us with a gift, we have registered at the following locations or you may contribute to our future together.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <div class="border p-8 text-center hover:shadow-xl transition" style="border-color: var(--primary); border-radius: var(--radius);">
+                    <i data-lucide="gift" class="w-16 h-16 gold-accent mx-auto mb-4"></i>
+                    <h3 class="text-2xl font-serif mb-3 gold-accent">Gift Registry</h3>
+                    <p class="mb-6 font-light">We are registered at:</p>
+                    <div class="space-y-3">
+                        <a href="#" class="block py-3 px-6 border transition hover:bg-opacity-10" style="border-color: var(--primary); color: var(--primary); border-radius: var(--radius);">Luxury Home Store</a>
+                        <a href="#" class="block py-3 px-6 border transition hover:bg-opacity-10" style="border-color: var(--primary); color: var(--primary); border-radius: var(--radius);">Classic Registry Co.</a>
+                    </div>
+                </div>
+
+                <div class="border p-8 text-center hover:shadow-xl transition" style="border-color: var(--primary); border-radius: var(--radius);">
+                    <i data-lucide="piggy-bank" class="w-16 h-16 gold-accent mx-auto mb-4"></i>
+                    <h3 class="text-2xl font-serif mb-3 gold-accent">Honeymoon Fund</h3>
+                    <p class="mb-6 font-light">Help us create memories:</p>
+                    <div class="space-y-2 text-left">
+                        <p class="text-sm"><strong class="gold-accent">Bank Name:</strong> Rosewood Bank</p>
+                        <p class="text-sm"><strong class="gold-accent">Account Name:</strong> Sarah & Michael Wedding</p>
+                        <p class="text-sm"><strong class="gold-accent">Account Number:</strong> 1234-5678-9012</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border p-8 text-center" style="border-color: var(--primary); border-radius: var(--radius); background: var(--muted);">
+                <i data-lucide="heart" class="w-12 h-12 gold-accent mx-auto mb-4"></i>
+                <h2 class="text-3xl font-serif mb-4 gold-accent">Thank You</h2>
+                <p class="font-light leading-relaxed max-w-2xl mx-auto">We are incredibly grateful for your love, support, and generosity. Your presence at our celebration means the world to us, and any gift you choose to give will be treasured as we begin our new journey together.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 px-4 border-t" style="border-color: var(--border);">
+        <div class="max-w-6xl mx-auto text-center">
+            <p class="text-sm opacity-70">© 2025 Sarah & Michael. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/navigation.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
