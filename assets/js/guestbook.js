@@ -11,28 +11,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('guestbook-form')?.addEventListener('submit', async function(e) {
         e.preventDefault();
-        const name = document.getElementById('guest-name').value;
-        const message = document.getElementById('guest-message').value;
+        const name = document.getElementById('guest-name').value.trim();
+        const message = document.getElementById('guest-message').value.trim();
+        const submitButton = this.querySelector('button[type="submit"]');
+
         if (name && message) {
-            const lang = window.location.pathname.includes('-th.html') ? 'th' : 'ko';
-
-            // 서버에 메시지 추가 요청
-            await fetch('https://whdmfua.github.io/Wedding-site/guestbook.html', {
-                method: 'POST',
-                body: new URLSearchParams({
-                    action: 'createMessage',
-                    name,
-                    message,
-                    lang
-                })
-            });
-
-            document.getElementById('guest-name').value = '';
-            document.getElementById('guest-message').value = '';
-            currentPage = 1;
-            await loadMessages(); // 서버에서 최신 메시지 재로딩
-        }
-    });
+            // Detect language from current page
+            const currentPageUrl = window.location.pathname.split('/').pop() || 'index.html';
+            const lang = currentPageUrl.includes('-th.html') ? 'th' : 'ko';
 
             try {
                 // 로딩 상태 표시
@@ -80,12 +66,13 @@ async function loadMessages() {
         container.innerHTML = `<p class="text-center opacity-50">${isThaiPage ? 'กำลังโหลด...' : '로딩 중...'}</p>`;
 
         // Google Sheets에서 메시지 로드
-        const res = await fetch('https://whdmfua.github.io/Wedding-site/guestbook.html?action=getMessages&page=' + currentPage + '&perPage=' + MESSAGES_PER_PAGE);
-        const json = await res.json();
-        allMessages = json.messages || [];
+        const result = await sheetsGuestbook.getMessages(currentPage, MESSAGES_PER_PAGE);
+        allMessages = result.messages;
+        totalPages = result.totalPages;
+
         displayMessages();
         displayPagination();
-} catch (error) {
+    } catch (error) {
         console.error('Error loading messages:', error);
         const currentPageLang = window.location.pathname.split('/').pop() || 'index.html';
         const isThaiPage = currentPageLang.includes('-th.html');
@@ -220,16 +207,6 @@ async function deleteMessage(rowIndex) {
     try {
         await sheetsGuestbook.deleteMessage(rowIndex, password);
 
-        // 삭제 요청
-        await fetch('https://whdmfua.github.io/Wedding-site/guestbook.html', {
-            method: 'POST',
-            body: new URLSearchParams({
-                action: 'deleteMessage',
-                rowIndex: messageId,
-                password // 프롬프트에서 받은 값
-            })
-        });
-        
         // 현재 페이지 재로드
         await loadMessages();
 
@@ -251,4 +228,3 @@ function escapeHtml(text) {
     };
     return text.replace(/[&<>"']/g, m => map[m]);
 }
-
