@@ -12,6 +12,7 @@ class GoogleSheetsGuestbook {
     jsonpRequest(url) {
         return new Promise((resolve, reject) => {
             const callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
+            const script = document.createElement('script');
 
             window[callbackName] = function(data) {
                 delete window[callbackName];
@@ -19,7 +20,6 @@ class GoogleSheetsGuestbook {
                 resolve(data);
             };
 
-            const script = document.createElement('script');
             script.src = url + (url.indexOf('?') >= 0 ? '&' : '?') + 'callback=' + callbackName;
             script.onerror = function() {
                 delete window[callbackName];
