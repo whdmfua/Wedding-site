@@ -1,5 +1,8 @@
-// Google Sheets Guestbook API (JSONP + iframe 방식)
+// Google Sheets Guestbook API
+// JSONP for GET requests, iframe for POST requests to bypass CORS
+
 const GOOGLE_SHEETS_CONFIG = {
+    // 사용자가 제공한 Apps Script Web App URL
     webAppUrl: 'https://script.google.com/macros/s/AKfycbwQpZcuEisC75jjkQxxBbqyaiy6pufuP1yVBjOJ-XObvd-5vvW92YRWiOay9iw1ImxeHA/exec'
 };
 
@@ -8,114 +11,168 @@ class GoogleSheetsGuestbook {
         this.webAppUrl = config.webAppUrl;
     }
 
-    // JSONP 요청 헬퍼
+    /**
+     * JSONP 요청 (GET용)
+     * CORS를 우회하기 위해 script 태그를 동적으로 생성
+     */
     jsonpRequest(url) {
         return new Promise((resolve, reject) => {
-            const callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
+            // 고유한 콜백 함수명 생성
+            const callbackName = 'jsonp_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
+
+            // 타임아웃 설정 (10초)
+            const timeout = setTimeout(() => {
+                cleanup();
+                reject(new Error('JSONP request timeout'));
+            }, 10000);
+
+            // 정리 함수
+            const cleanup = () => {
+                clearTimeout(timeout);
+                if (window[callbackName]) {
+                    delete window[callbackName];
+                }
+                if (script && script.parentNode) {
+                    script.parentNode.removeChild(script);
+                }
+            };
+
+            // script 엘리먼트 생성
             const script = document.createElement('script');
 
-            window[callbackName] = function(data) {
-                delete window[callbackName];
-                document.body.removeChild(script);
+            // 글로벌 콜백 함수 등록
+            window[callbackName] = (data) => {
+                cleanup();
                 resolve(data);
             };
 
-            script.src = url + (url.indexOf('?') >= 0 ? '&' : '?') + 'callback=' + callbackName;
-            script.onerror = function() {
-                delete window[callbackName];
-                document.body.removeChild(script);
+            // 에러 핸들링
+            script.onerror = () => {
+                cleanup();
                 reject(new Error('JSONP request failed'));
             };
 
-            document.body.appendChild(script);
+            // URL에 콜백 파라미터 추가
+            const separator = url.includes('?') ? '&' : '?';
+            script.src = `${url}${separator}callback=${callbackName}`;
+
+            // DOM에 추가하여 요청 시작
+            document.head.appendChild(script);
         });
     }
 
-    // 메시지 작성 (iframe form submit 방식)
-    async createMessage(name, message, lang = 'ko') {
+    /**
+     * iframe form submit (POST용)
+     * CORS를 우회하기 위해 hidden iframe으로 form을 제출
+     */
+    formSubmit(data) {
         return new Promise((resolve, reject) => {
-            try {
-                // 고유 ID 생성
-                const uniqueId = 'guestbook_iframe_' + Date.now();
+            const iframeId = 'iframe_' + Date.now();
 
-                // iframe 생성
-                const iframe = document.createElement('iframe');
-                iframe.name = uniqueId;
-                iframe.style.display = 'none';
-                document.body.appendChild(iframe);
+            // iframe 생성
+            const iframe = document.createElement('iframe');
+            iframe.name = iframeId;
+            iframe.style.display = 'none';
 
-                // form 생성
-                const form = document.createElement('form');
-                form.target = uniqueId;
-                form.method = 'POST';
-                form.action = this.webAppUrl;
-                form.style.display = 'none';
+            // form 생성
+            const form = document.createElement('form');
+            form.target = iframeId;
+            form.method = 'POST';
+            form.action = this.webAppUrl;
+            form.style.display = 'none';
 
-                // 데이터 필드 추가
-                const fields = {
-                    action: 'createMessage',
-                    name: name,
-                    message: message,
-                    lang: lang
-                };
+            // 데이터를 hidden input으로 추가
+            Object.keys(data).forEach(key => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = data[key];
+                form.appendChild(input);
+            });
 
-                for (const key in fields) {
-                    const input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = key;
-                    input.value = fields[key];
-                    form.appendChild(input);
+            // 타임아웃 설정 (10초)
+            const timeout = setTimeout(() => {
+                cleanup();
+                reject(new Error('Form submit timeout'));
+            }, 10000);
+
+            // 정리 함수
+            const cleanup = () => {
+                clearTimeout(timeout);
+                if (iframe.parentNode) {
+                    iframe.parentNode.removeChild(iframe);
                 }
+                if (form.parentNode) {
+                    form.parentNode.removeChild(form);
+                }
+            };
 
-                document.body.appendChild(form);
+            // iframe 로드 완료 이벤트
+            // 주의: 응답 데이터를 직접 읽을 수 없으므로 성공으로 간주
+            iframe.onload = () => {
+                setTimeout(() => {
+                    cleanup();
+                    resolve(true);
+                }, 500);
+            };
 
-                // iframe 로드 완료 이벤트
-                iframe.onload = function() {
-                    // 성공으로 간주 (응답 확인 불가)
-                    setTimeout(() => {
-                        document.body.removeChild(iframe);
-                        document.body.removeChild(form);
-                        resolve({
-                            timestamp: new Date().toISOString(),
-                            name: name,
-                            message: message,
-                            lang: lang,
-                            date: new Date().toLocaleDateString('ko-KR')
-                        });
-                    }, 1000);
-                };
+            // 에러 핸들링
+            iframe.onerror = () => {
+                cleanup();
+                reject(new Error('Form submit failed'));
+            };
 
-                // 에러 처리
-                iframe.onerror = function() {
-                    document.body.removeChild(iframe);
-                    document.body.removeChild(form);
-                    reject(new Error('Failed to submit form'));
-                };
+            // DOM에 추가
+            document.body.appendChild(iframe);
+            document.body.appendChild(form);
 
-                // form 제출
-                form.submit();
-            } catch (error) {
-                console.error('Failed to create message:', error);
-                reject(error);
-            }
+            // form 제출
+            form.submit();
         });
     }
 
-    // 메시지 목록 조회 (JSONP 사용)
+    /**
+     * 메시지 작성
+     */
+    async createMessage(name, message, lang = 'ko') {
+        try {
+            await this.formSubmit({
+                action: 'createMessage',
+                name: name,
+                message: message,
+                lang: lang
+            });
+
+            return {
+                timestamp: new Date().toISOString(),
+                name: name,
+                message: message,
+                lang: lang,
+                date: new Date().toLocaleDateString('ko-KR')
+            };
+        } catch (error) {
+            console.error('Failed to create message:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * 메시지 목록 조회
+     */
     async getMessages(page = 1, perPage = 10) {
         try {
             const url = `${this.webAppUrl}?action=getMessages&page=${page}&perPage=${perPage}`;
             const data = await this.jsonpRequest(url);
 
-            if (!data.success) {
-                throw new Error(data.error || 'Failed to get messages');
+            if (!data || !data.success) {
+                throw new Error(data?.error || 'Failed to get messages');
             }
 
             return {
-                messages: data.messages,
-                totalPages: data.totalPages,
-                currentPage: data.currentPage,
-                totalCount: data.totalCount
+                messages: data.messages || [],
+                totalPages: data.totalPages || 0,
+                currentPage: data.currentPage || page,
+                totalCount: data.totalCount || 0
             };
         } catch (error) {
             console.error('Failed to load messages:', error);
@@ -123,85 +180,43 @@ class GoogleSheetsGuestbook {
         }
     }
 
-    // 전체 메시지 수 조회 (JSONP 사용)
+    /**
+     * 전체 메시지 수 조회
+     */
     async getTotalCount() {
         try {
             const url = `${this.webAppUrl}?action=getCount`;
             const data = await this.jsonpRequest(url);
 
-            if (!data.success) {
-                throw new Error(data.error || 'Failed to get count');
+            if (!data || !data.success) {
+                throw new Error(data?.error || 'Failed to get count');
             }
 
-            return data.totalCount;
+            return data.totalCount || 0;
         } catch (error) {
             console.error('Failed to get total count:', error);
             return 0;
         }
     }
 
-    // 메시지 삭제 (iframe form submit 방식)
+    /**
+     * 메시지 삭제
+     */
     async deleteMessage(rowIndex, password) {
-        return new Promise((resolve, reject) => {
-            try {
-                // 고유 ID 생성
-                const uniqueId = 'guestbook_delete_iframe_' + Date.now();
+        try {
+            await this.formSubmit({
+                action: 'deleteMessage',
+                rowIndex: rowIndex,
+                password: password
+            });
 
-                // iframe 생성
-                const iframe = document.createElement('iframe');
-                iframe.name = uniqueId;
-                iframe.style.display = 'none';
-                document.body.appendChild(iframe);
-
-                // form 생성
-                const form = document.createElement('form');
-                form.target = uniqueId;
-                form.method = 'POST';
-                form.action = this.webAppUrl;
-                form.style.display = 'none';
-
-                // 데이터 필드 추가
-                const fields = {
-                    action: 'deleteMessage',
-                    rowIndex: rowIndex,
-                    password: password
-                };
-
-                for (const key in fields) {
-                    const input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = key;
-                    input.value = fields[key];
-                    form.appendChild(input);
-                }
-
-                document.body.appendChild(form);
-
-                // iframe 로드 완료 이벤트
-                iframe.onload = function() {
-                    setTimeout(() => {
-                        document.body.removeChild(iframe);
-                        document.body.removeChild(form);
-                        resolve(true);
-                    }, 1000);
-                };
-
-                // 에러 처리
-                iframe.onerror = function() {
-                    document.body.removeChild(iframe);
-                    document.body.removeChild(form);
-                    reject(new Error('Failed to delete message'));
-                };
-
-                // form 제출
-                form.submit();
-            } catch (error) {
-                console.error('Failed to delete message:', error);
-                reject(error);
-            }
-        });
+            return true;
+        } catch (error) {
+            console.error('Failed to delete message:', error);
+            throw error;
+        }
     }
 }
 
-// Export API instance
+// 싱글톤 인스턴스 export
 const sheetsGuestbook = new GoogleSheetsGuestbook(GOOGLE_SHEETS_CONFIG);
