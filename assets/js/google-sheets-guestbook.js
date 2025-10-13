@@ -1,6 +1,6 @@
 // Google Sheets Guestbook API
 const GOOGLE_SHEETS_CONFIG = {
-    webAppUrl: 'https://script.google.com/macros/s/AKfycbx-LA5amhJZdPvvJRXBBVlUIQIgHjeZRiMzuxYmtC6WCHgBmD_zeLJOWz7apmAjuGFLGg/exec'
+    webAppUrl: 'https://script.google.com/macros/s/AKfycbz0GMTHqxBgS7IxHaveXfI3ojeEPGRKdOgwSVw5b_ivAO3kVVCnl1YxLKjVxbcu9uSSgQ/exec'
 };
 
 class GoogleSheetsGuestbook {
