@@ -3,7 +3,7 @@
 
 const GOOGLE_SHEETS_CONFIG = {
     // 사용자가 제공한 Apps Script Web App URL
-    webAppUrl: 'https://script.google.com/macros/s/AKfycbwQpZcuEisC75jjkQxxBbqyaiy6pufuP1yVBjOJ-XObvd-5vvW92YRWiOay9iw1ImxeHA/exec'
+    webAppUrl: 'https://script.google.com/macros/s/AKfycbx-LA5amhJZdPvvJRXBBVlUIQIgHjeZRiMzuxYmtC6WCHgBmD_zeLJOWz7apmAjuGFLGg/exec'
 };
 
 class GoogleSheetsGuestbook {
